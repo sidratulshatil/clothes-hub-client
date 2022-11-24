@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Category = () => {
     const [categories, setCategories] = useState(null)
-    console.log(categories)
+    // console.log(categories)
     useEffect(() => {
         fetch(`http://localhost:5000/category`)
             .then(res => res.json())
@@ -18,7 +19,7 @@ const Category = () => {
                         <h2 className="card-title justify-center">{category.category_name}</h2>
                         <p>Here You Find Different Kind Of {category.category_name}</p>
                         <div className="card-actions justify-center">
-                            <button className="btn btn-primary ">Show All Products</button>
+                            <Link to={`/category/${category.No}`}><button className="btn btn-primary ">Show All Products</button></Link>
                         </div>
                     </div>
                 </div>)
