@@ -16,7 +16,10 @@ const Navbar = () => {
                     <li><Link>Advertised items</Link></li>
                     {
                         user ?
-                            <> <li><button onClick={logOut}>LogOut</button></li></>
+                            <>
+                                <li><button onClick={logOut}>LogOut</button></li>
+                                <li><Link to='/dashboard'>DashBoard</Link></li>
+                            </>
                             :
                             <> <li><Link to='/login'>Login</Link></li></>
                     }

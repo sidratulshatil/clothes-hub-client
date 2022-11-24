@@ -1,14 +1,59 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Link } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const SignUp = () => {
+    const { createUser, updateUser } = useContext(AuthContext)
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const handleSignUp = (event) => {
+        event.preventDefault()
+        const form = event.target
+        const name = form.name.value
+        const type = form.type.value
+        const email = form.email.value
+        const password = form.password.value
+        console.log(name, type, email, password)
+        createUser(email, password)
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                form.reset()
+                handleUpdatUserProfile(name)
+                saveUser(name, email, type)
+            })
+            .catch(error => {
+                console.error(error)
+
+            })
+    }
+    const handleUpdatUserProfile = (name) => {
+        const profile = {
+            displayName: name
+
+        }
+        updateUser(profile)
+            .then(() => { })
+            .catch(error => console.error(error))
+    }
+    const saveUser = (name, email, type) => {
+        const user = { name, email, type }
+        fetch('http://localhost:5000/users', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Saved-User :', data)
+                setCreatedUserEmail(email)
+            })
+    }
     return (
         <div>
-
-
-
             <div >
-                <Form>
+                <Form onSubmit={handleSignUp}>
                     <div className="hero min-h-screen bg-base-200">
 
                         <div className="hero-content ">
@@ -28,7 +73,7 @@ const SignUp = () => {
                                         <label className="label">
                                             <span className="label-text">Select Account Type</span>
                                         </label>
-                                        <select className="select select-bordered w-full max-w-xs">
+                                        <select name='type' className="select select-bordered w-full max-w-xs">
 
                                             <option selected>Buyers</option>
                                             <option>Seller</option>

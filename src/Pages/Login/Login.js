@@ -2,12 +2,16 @@ import React, { useContext } from 'react';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa'
 import { AuthContext } from '../../contexts/AuthProvider';
+import { toast } from 'react-toastify';
+import { data } from 'autoprefixer';
 
 const Login = () => {
-    const { googleSignin } = useContext(AuthContext)
+    const { googleSignin, signIn } = useContext(AuthContext)
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
     const navigate = useNavigate()
+
+
     const handleGoogleSignIn = () => {
         googleSignin()
             .then(result => {
@@ -17,9 +21,27 @@ const Login = () => {
             })
             .catch(err => console.log(err.message))
     }
+    const handleLogin = (event) => {
+        event.preventDefault()
+        const form = event.target
+        const email = form.email.value
+        const password = form.password.value
+        // console.log(email, password)
+        signIn(email, password)
+            .then(result => {
+                const user = result.user
+                console.log(user)
+                navigate(from, { replace: true })
+            })
+            .catch(err => {
+                console.log(err.message)
+
+            })
+    }
+
     return (
         <div>
-            <Form >
+            <Form onSubmit={handleLogin} >
                 <div className="hero min-h-screen bg-base-200">
                     <div className="hero-content ">
                         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
