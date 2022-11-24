@@ -16,9 +16,10 @@ const CategoryProducts = () => {
                         <p><span className='text-xl font-semibold'>Location:</span>{product.location}</p>
                         <p><span className='text-xl font-semibold'>Original Price:</span> {product.original_price}</p>
                         <p><span className='text-xl font-semibold'>Resale Price:</span>{product.resale_price}</p>
-                        <p><span className='text-xl font-semibold'>Years Of Use</span>:{product.years_of_use}</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Book Now</button>
+                        <p><span className='text-xl font-semibold'>Years Of Use:</span>{product.years_of_use}</p>
+                        <p><span className='text-xl font-semibold'>Sellers Name:</span>{product.sellers_name}</p>
+                        <div className="card-actions justify-center">
+                            <button className="btn btn-primary ">Book Now</button>
                         </div>
                     </div>
                 </div>)

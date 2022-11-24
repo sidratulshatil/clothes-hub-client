@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
@@ -12,7 +14,12 @@ const Navbar = () => {
                     <li><Link to='/'>Home</Link></li>
                     <li><Link>Product Categories</Link></li>
                     <li><Link>Advertised items</Link></li>
-                    <li><Link to='/login'>Login</Link></li>
+                    {
+                        user ?
+                            <> <li><button onClick={logOut}>LogOut</button></li></>
+                            :
+                            <> <li><Link to='/login'>Login</Link></li></>
+                    }
 
                 </ul>
             </div>
