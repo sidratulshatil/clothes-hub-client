@@ -4,7 +4,8 @@ import './CategoryProducts.css'
 import { AiOutlineCheck } from "react-icons/ai";
 import BookingModal from './BookingModal/BookingModal';
 import { AuthContext } from '../../../contexts/AuthProvider';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const CategoryProducts = () => {
     const products = useLoaderData()
     const { user } = useContext(AuthContext)
@@ -33,6 +34,7 @@ const CategoryProducts = () => {
                 item={item}
                 user={user}
             ></BookingModal>
+            <ToastContainer />
         </div>
     );
 };

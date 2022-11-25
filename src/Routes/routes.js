@@ -6,6 +6,7 @@ import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../Pages/Dashboard/AllSellers/AllSellers";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 import ReportedItems from "../Pages/Dashboard/ReportedItems/ReportedItems";
 import CategoryProducts from "../Pages/Home/Category/CategoryProducts";
 import Home from "../Pages/Home/Home";
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
             { path: '/dashboard/reporteditems', element: <ReportedItems></ReportedItems> },
             { path: '/dashboard/addaproduct', element: <AddAProduct></AddAProduct> },
             { path: '/dashboard/myorders', element: <MyOrders></MyOrders> },
+            { path: '/dashboard/payment/:id', element: <Payment></Payment> },
         ]
     }
 ])

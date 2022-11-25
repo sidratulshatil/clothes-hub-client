@@ -2,6 +2,8 @@ import React from 'react';
 import { Form } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+
+
 const BookingModal = ({ item, user }) => {
     console.log(item.resale_price, item.name)
     const { img } = item
@@ -11,8 +13,10 @@ const BookingModal = ({ item, user }) => {
         const name = form.name.value
         const item = form.item.value
         const image = item.img
+        const email = user.email
         const price = form.price.value
         const booking = {
+            email,
             name,
             item,
             price,
@@ -29,7 +33,10 @@ const BookingModal = ({ item, user }) => {
             .then(data => {
                 console.log(data);
                 if (data.acknowledged) {
-                    toast.success('Item is Booked');
+                    toast.success('Item is Booked', {
+
+                    })
+
                 }
                 else {
                     toast.error(data.message);
@@ -53,6 +60,7 @@ const BookingModal = ({ item, user }) => {
                     <button className="btn w-2/3">Submit</button>
                 </div>
             </div>
+
         </Form>
         </>
     );
