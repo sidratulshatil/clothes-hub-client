@@ -8,9 +8,9 @@ import { AuthContext } from '../../../contexts/AuthProvider';
 const CategoryProducts = () => {
     const products = useLoaderData()
     const { user } = useContext(AuthContext)
-    const [item, setItem] = useState(null)
+    const [item, setItem] = useState({})
     const { img } = products
-    // console.log(products)
+    console.log(products)
     return (
         <div className='category-product-div mx-40 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-8  justify-center'>
             {
