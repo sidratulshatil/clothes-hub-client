@@ -4,8 +4,7 @@ import './CategoryProducts.css'
 import { AiOutlineCheck } from "react-icons/ai";
 import BookingModal from './BookingModal/BookingModal';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 const CategoryProducts = () => {
     const products = useLoaderData()
     const { user } = useContext(AuthContext)
@@ -24,6 +23,7 @@ const CategoryProducts = () => {
                         <p><span className='text-xl font-semibold'>Resale Price:</span>{product.resale_price}</p>
                         <p><span className='text-xl font-semibold'>Years Of Use:</span>{product.years_of_use}</p>
                         <p><span className='text-xl font-semibold '>Sellers Name:</span>{product.sellers_name} <span className='bg-blue-500 text-white p-2 rounded-lg'>☑</span> </p>
+                        <p><span className='text-xl font-semibold '>Post Date:</span>{product.date}  </p>
                         <div className="card-actions justify-center">
                             <label htmlFor="booking-modal" className="btn btn-primary " onClick={() => setItem(product)} >Book Now</label>
                         </div>
@@ -34,7 +34,7 @@ const CategoryProducts = () => {
                 item={item}
                 user={user}
             ></BookingModal>
-            <ToastContainer />
+
         </div>
     );
 };
