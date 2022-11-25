@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Form, Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from 'react-icons/fa'
 import { AuthContext } from '../../contexts/AuthProvider';
@@ -10,13 +10,15 @@ const Login = () => {
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
     const navigate = useNavigate()
-
+    const [createdUserEmail, setCreatedUserEmail] = useState('')
 
     const handleGoogleSignIn = () => {
         googleSignin()
             .then(result => {
                 const user = result.user
+                const type = "Buyers"
                 console.log(user)
+                saveUser(user.displayName, user.email, type)
                 navigate(from, { replace: true })
             })
             .catch(err => console.log(err.message))
@@ -38,7 +40,21 @@ const Login = () => {
 
             })
     }
-
+    const saveUser = (name, email, type) => {
+        const user = { name, email, type }
+        fetch('http://localhost:5000/users', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Saved-User :', data)
+                setCreatedUserEmail(email)
+            })
+    }
     return (
         <div>
             <Form onSubmit={handleLogin} >
