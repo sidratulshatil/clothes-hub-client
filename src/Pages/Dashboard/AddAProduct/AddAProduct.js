@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
-import { Form } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Form, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const AddAProduct = () => {
-    const { user } = useContext(AuthContext)
+    const { user, setMyproducts } = useContext(AuthContext)
+    const [verified, setVerified] = useState(false)
     const postDate = new Date().toLocaleDateString()
+    const navigate = useNavigate()
+    // console.log(user.displayName)
+
 
     const handleAddProduct = event => {
         event.preventDefault()
@@ -18,10 +22,11 @@ const AddAProduct = () => {
         const resale_price = form.resale_price.value
         const years_of_use = form.years_of_use.value
         const original_price = form.original_price.value
-        const sellers_name = form.sellers_name.value
+        const sellers_name = user.displayName
         const date = postDate
 
         const product = {
+            email,
             category_name,
             name,
             img,
@@ -30,7 +35,8 @@ const AddAProduct = () => {
             resale_price,
             years_of_use,
             sellers_name,
-            date
+            date,
+
         }
         // console.log(email, category_name, name, img, location, resale_price, years_of_use, original_price, sellers_name, date)
         fetch(`http://localhost:5000/bookings/product`, {
@@ -44,8 +50,36 @@ const AddAProduct = () => {
             .then(result => {
                 console.log(result)
                 toast.success('Product Added Successfull!!')
+                saveMyProduct(product)
+                navigate('/dashboard/myproducts')
             })
     }
+    const saveMyProduct = (data) => {
+        const product = { data }
+        fetch('http://localhost:5000/myproducts', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Saved-product :', data)
+
+            })
+    }
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/email?email=${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data[0].verified)
+                if (data[0].verified) {
+                    setVerified(true)
+                }
+                setVerified(false)
+            })
+    }, [user.email])
     return (
         <div className='border-solid'>
             <Form onSubmit={handleAddProduct}>
@@ -59,7 +93,7 @@ const AddAProduct = () => {
                 <span>Original Price: <input type="number" name='original_price' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Resale price: <input type="number" name='resale_price' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Years of use:  <input type="text" name='years_of_use' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
-                <span>Sellers Name: <input type="text" name='sellers_name' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
+                <span>Sellers Name: <input type="text" defaultValue={user.displayName} placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Products Image: <input type="text" name='img' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Products Condition: <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Products Location: <input type="text" name='location' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>

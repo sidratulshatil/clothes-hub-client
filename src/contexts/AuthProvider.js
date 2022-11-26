@@ -11,6 +11,7 @@ const auth = getAuth(app)
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
+
     const provider = new GoogleAuthProvider();
 
     const createUser = (email, password) => {
@@ -50,6 +51,7 @@ const AuthProvider = ({ children }) => {
         googleSignin,
         user,
         loading,
+
     }
     return (
         <AuthContext.Provider value={authInfo}>

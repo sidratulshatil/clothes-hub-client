@@ -36,20 +36,23 @@ const BookingModal = ({ item, user }) => {
                     toast.success('Item is Booked', {
                     })
                     form.reset()
+                    close()
                 }
                 else {
                     toast.error(data.message);
                 }
             })
     }
-
+    const close = () => {
+        console.log('Modal closed')
+    }
     return (
         <> <Form onSubmit={handleBooking}>
             <input type="checkbox" id="booking-modal" className="modal-toggle" />
 
             <div className="modal ">
                 <div className="modal-box relative my-2">
-                    <label htmlFor="booking-modal" className="btn  btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label onClick={close} htmlFor="booking-modal" className="btn  btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <input type="text" name='name' defaultValue={user.displayName} disabled placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" />
                     <input type="text" name='email' defaultValue={user.email} disabled placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" />
                     <input type="text" name='item' defaultValue={item?.name} disabled placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" />
