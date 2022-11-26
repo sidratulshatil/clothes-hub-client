@@ -8,14 +8,14 @@ const AddAProduct = () => {
     const [verified, setVerified] = useState(false)
     const postDate = new Date().toLocaleDateString()
     const navigate = useNavigate()
-    // console.log(user.displayName)
+    console.log(verified)
 
 
     const handleAddProduct = event => {
         event.preventDefault()
         const form = event.target
         const category_name = form.category_name.value
-        const email = user.email
+        const email = user?.email
         const name = form.name.value
         const img = form.img.value
         const location = form.location.value
@@ -36,7 +36,7 @@ const AddAProduct = () => {
             years_of_use,
             sellers_name,
             date,
-
+            verified,
         }
         // console.log(email, category_name, name, img, location, resale_price, years_of_use, original_price, sellers_name, date)
         fetch(`http://localhost:5000/bookings/product`, {
@@ -55,7 +55,7 @@ const AddAProduct = () => {
             })
     }
     const saveMyProduct = (data) => {
-        const product = { data }
+        const product = data
         fetch('http://localhost:5000/myproducts', {
             method: "POST",
             headers: {
@@ -77,9 +77,9 @@ const AddAProduct = () => {
                 if (data[0].verified) {
                     setVerified(true)
                 }
-                setVerified(false)
+                // setVerified(false)
             })
-    }, [user.email])
+    }, [user])
     return (
         <div className='border-solid'>
             <Form onSubmit={handleAddProduct}>

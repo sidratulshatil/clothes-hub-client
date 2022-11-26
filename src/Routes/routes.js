@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import Main from "../layout/Main";
+import AdvertisedItems from "../Pages/AdvertisedItems/AdvertisedItems";
 import Blogs from "../Pages/Blogs/Blogs";
 import AddAProduct from "../Pages/Dashboard/AddAProduct/AddAProduct";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
             { path: '/signup', element: <SignUp></SignUp> },
             { path: '/blogs', element: <Blogs></Blogs> },
             { path: '/*', element: <ErrorPage></ErrorPage> },
+            { path: 'advertiseditems', element: <AdvertisedItems></AdvertisedItems> },
             { path: '/category/:id', element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>, loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`) },
         ]
     },
@@ -36,6 +38,7 @@ const router = createBrowserRouter([
             { path: '/dashboard/addaproduct', element: <AddAProduct></AddAProduct> },
             { path: '/dashboard/myorders', element: <MyOrders></MyOrders> },
             { path: '/dashboard/myproducts', element: <MyProducts></MyProducts> },
+
             { path: '/dashboard/payment/:id', element: <Payment></Payment> },
         ]
     }
