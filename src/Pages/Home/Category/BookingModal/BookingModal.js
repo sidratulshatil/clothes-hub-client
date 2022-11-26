@@ -35,6 +35,7 @@ const BookingModal = ({ item, user }) => {
                 if (data.acknowledged) {
                     toast.success('Item is Booked', {
                     })
+                    form.reset()
                 }
                 else {
                     toast.error(data.message);

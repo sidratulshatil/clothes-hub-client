@@ -12,7 +12,7 @@ const AllSellers = () => {
         queryFn: async () => {
             const res = await fetch(url)
             const data = await res.json()
-            console.log(data)
+            // console.log(data)
             return data
         }
     })
@@ -34,6 +34,20 @@ const AllSellers = () => {
             })
 
     }
+    const handleVerify = (id) => {
+        fetch(`http://localhost:5000/users/${id}`, {
+            method: "PUT",
+            // headers: {
+            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+            // }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                toast.success('verified Successfully')
+                refetch()
+            })
+    }
     return (
         <div>
             <div className="overflow-x-auto">
@@ -45,15 +59,17 @@ const AllSellers = () => {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Delete</th>
+                            <th>Verify</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            users.map((user, i) => user.type === "Buyers" && <tr key={user._id}>
+                            users.map((user, i) => user.type === "Seller" && <tr key={user._id}>
                                 <th>{i + 1}</th>
                                 <td>{user.name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.role !== "admin" && <button onClick={() => deleteUser(user._id)} className='btn btn-xs btn-warning text-white font-bold'>Delete</button>}</td>
+                                <td>{!user.verified ? <><button onClick={() => handleVerify(user._id)} className='btn btn-xs btn-warning text-white font-bold'>Verify</button></> : <><button className='btn btn-xs bg-green-500'>Verified</button></>}</td>
                             </tr>)
                         }
 
