@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import Loading from '../../../shared/Loading/Loading';
 
 const AllSellers = () => {
 
     const [deletingUser, setDeletingUser] = useState(null)
     const url = `http://localhost:5000/users`
 
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await fetch(url)
@@ -33,6 +34,9 @@ const AllSellers = () => {
 
             })
 
+    }
+    if (isLoading) {
+        return <Loading></Loading>
     }
     const handleVerify = (id) => {
         fetch(`http://localhost:5000/users/${id}`, {
