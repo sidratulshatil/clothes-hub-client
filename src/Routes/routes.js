@@ -10,6 +10,7 @@ import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import ReportedItems from "../Pages/Dashboard/ReportedItems/ReportedItems";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import CategoryProducts from "../Pages/Home/Category/CategoryProducts";
 import Home from "../Pages/Home/Home";
 import SignUp from "../Pages/Home/SignUp/SignUp";
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
             { path: '/login', element: <Login></Login> },
             { path: '/signup', element: <SignUp></SignUp> },
             { path: '/blogs', element: <Blogs></Blogs> },
+            { path: '/*', element: <ErrorPage></ErrorPage> },
             { path: '/category/:id', element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>, loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`) },
         ]
     },

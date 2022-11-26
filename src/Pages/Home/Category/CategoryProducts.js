@@ -22,10 +22,10 @@ const CategoryProducts = () => {
                         <p><span className='text-xl font-semibold'>Original Price:</span> {product.original_price}</p>
                         <p><span className='text-xl font-semibold'>Resale Price:</span>{product.resale_price}</p>
                         <p><span className='text-xl font-semibold'>Years Of Use:</span>{product.years_of_use}</p>
-                        <p><span className='text-xl font-semibold '>Sellers Name:</span>{product.sellers_name} <span className='bg-blue-500 text-white p-2 rounded-lg'>☑</span> </p>
+                        <p><span className='text-xl font-semibold '>Sellers Name:</span>{product.sellers_name} {user.verified && <span className='bg-blue-500 text-white p-2 rounded-lg'>☑</span>} </p>
                         <p><span className='text-xl font-semibold '>Post Date:</span>{product.date}  </p>
                         <div className="card-actions justify-center">
-                            <label htmlFor="booking-modal" className="btn btn-primary " onClick={() => setItem(product)} >Book Now</label>
+                            {user.verified && <label htmlFor="booking-modal" className="btn btn-primary " onClick={() => setItem(product)} >Book Now</label>}
                         </div>
                     </div>
                 </div>)
