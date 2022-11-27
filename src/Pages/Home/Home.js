@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Contact from '../Contact/Contact';
 import Banner from './Banner/Banner';
 import Category from './Category/Category';
 
@@ -34,13 +35,17 @@ const Home = () => {
                                 <p><span className='text-xl font-semibold '>Sellers Name:</span>{advertisedItem.sellers_name} {advertisedItem.verified && <span className='bg-blue-500 text-white p-2 rounded-lg'>☑</span>} </p>
                                 <p><span className='text-xl font-semibold '>Post Date:</span>{advertisedItem.date}  </p>
                                 <div className="card-actions justify-center">
-                                    {/* {advertisedItem.verified && <label htmlFor="booking-modal" className="btn btn-primary "  >Book Now</label>} */}
+                                    {advertisedItem.verified && <label htmlFor="booking-modal" className="btn btn-primary "  >Book Now</label>}
                                 </div>
                             </div>
                         </div>)
                     }
                 </div>
             }
+            <div>
+                <h1 className='text-2xl font-bold text-blue-500 my-3'>Contact Us</h1>
+                <Contact></Contact>
+            </div>
         </div>
     );
 };

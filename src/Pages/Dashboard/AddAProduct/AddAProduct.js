@@ -8,7 +8,7 @@ const AddAProduct = () => {
     const [verified, setVerified] = useState(false)
     const postDate = new Date().toLocaleDateString()
     const navigate = useNavigate()
-    console.log(verified)
+    // console.log(verified)
 
 
     const handleAddProduct = event => {
@@ -49,6 +49,9 @@ const AddAProduct = () => {
             .then(res => res.json())
             .then(result => {
                 console.log(result)
+                if (result.message === 'Forbiddden access') {
+                    return toast.error('You are not a seller')
+                }
                 toast.success('Product Added Successfull!!')
                 saveMyProduct(product)
                 navigate('/dashboard/myproducts')
@@ -73,7 +76,7 @@ const AddAProduct = () => {
         fetch(`http://localhost:5000/users/email?email=${user.email}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data[0].verified)
+                // console.log(data[0].verified)
                 if (data[0].verified) {
                     setVerified(true)
                 }
@@ -93,7 +96,7 @@ const AddAProduct = () => {
                 <span>Original Price: <input type="number" name='original_price' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Resale price: <input type="number" name='resale_price' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Years of use:  <input type="text" name='years_of_use' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
-                <span>Sellers Name: <input type="text" defaultValue={user.displayName} placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
+                <span>Sellers Name: <input disabled type="text" defaultValue={user.displayName} placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Products Image: <input type="text" name='img' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Products Condition: <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>
                 <span>Products Location: <input type="text" name='location' placeholder="Type here" className="input input-bordered w-full max-w-xs my-2" /><br /></span>

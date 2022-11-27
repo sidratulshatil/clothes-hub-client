@@ -44,7 +44,33 @@ const MyProducts = () => {
 
             })
     }
+    const handleDelete = (id) => {
+        console.log(id)
+        fetch(`http://localhost:5000/myproducts/${id}`, {
+            method: "DELETE",
+            // headers: {
+            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+            // }
+        })
+            .then(res => res.json())
+            .then(data => {
+                totalDelete(id)
+                console.log(data)
+                if (data.deletedCount > 0) {
+                    toast.success(`Product deleted successfully`)
 
+                }
+
+            })
+    }
+    const totalDelete = (id) => {
+        fetch(`http://localhost:5000/bookings/product/${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+    }
     return (
         <div className='category-product-div mx-40 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-8  justify-center'>
             {
@@ -57,6 +83,7 @@ const MyProducts = () => {
                             {
                                 myProduct?.advertised ? <><button disabled className="btn btn-success">Advertised</button></> : <><button onClick={() => handleAddAdvertisement(myProduct)} className="btn btn-primary">Advertise</button></>
                             }
+                            <button onClick={() => handleDelete(myProduct._id)} className="btn btn-error text-white font-bold">Delete Product</button>
                         </div>
                     </div>
 
