@@ -4,15 +4,38 @@ import './CategoryProducts.css'
 import { AiOutlineCheck } from "react-icons/ai";
 import BookingModal from './BookingModal/BookingModal';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import { toast } from 'react-toastify';
 
 const CategoryProducts = () => {
     const products = useLoaderData()
     const { user } = useContext(AuthContext)
     const [item, setItem] = useState({})
-
+    const [currentUser, setCurrentUser] = useState({})
     const { img } = products
-    console.log(products)
+    console.log(currentUser)
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/users/type/${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setCurrentUser(data)
+            })
+    }, [])
+    const addToWish = (product) => {
+        fetch(`http://localhost:5000/mywishlists`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(product)
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success('Added To Wishlists')
+
+            })
+    }
 
     return (
         <div className='category-product-div mx-40 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 my-8  justify-center'>
@@ -29,6 +52,7 @@ const CategoryProducts = () => {
                         <p><span className='text-xl font-semibold '>Post Date:</span>{product.date}  </p>
                         <div className="card-actions justify-center">
                             {product.verified && <label htmlFor="booking-modal" className="btn btn-primary " onClick={() => setItem(product)} >Book Now</label>}
+                            {currentUser.type === 'Buyers' && <button className="btn btn-primary " onClick={() => addToWish(product)} >Add To Wishlist</button>}
                         </div>
                     </div>
                 </div>)

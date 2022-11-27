@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Form, Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import useToken from '../../../Hooks/useToken';
 
 const SignUp = () => {
     const { createUser, updateUser } = useContext(AuthContext)
     const [createdUserEmail, setCreatedUserEmail] = useState('')
+
+    const [token] = useToken(createdUserEmail)
     const handleSignUp = (event) => {
         event.preventDefault()
         const form = event.target

@@ -9,7 +9,11 @@ const AllBuyers = () => {
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch(url)
+            const res = await fetch(url, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json()
             // console.log(data)
             return data
@@ -18,9 +22,9 @@ const AllBuyers = () => {
     const deleteUser = (user) => {
         fetch(`http://localhost:5000/users/${user}`, {
             method: "DELETE",
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
@@ -39,9 +43,9 @@ const AllBuyers = () => {
     const handleVerify = (id) => {
         fetch(`http://localhost:5000/users/${id}`, {
             method: "PUT",
-            // headers: {
-            //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-            // }
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {

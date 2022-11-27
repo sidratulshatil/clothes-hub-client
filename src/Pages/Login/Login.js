@@ -4,6 +4,7 @@ import { FaGoogle } from 'react-icons/fa'
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-toastify';
 import { data } from 'autoprefixer';
+import useToken from '../../Hooks/useToken';
 
 const Login = () => {
     const { googleSignin, signIn } = useContext(AuthContext)
@@ -11,6 +12,12 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/'
     const navigate = useNavigate()
     const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [loginUserEmail, setLoginUserEmail] = useState('')
+    const [token] = useToken(loginUserEmail)
+    console.log('Login USER EMAIL', loginUserEmail)
+    if (token) {
+        navigate(from, { replace: true })
+    }
 
     const handleGoogleSignIn = () => {
         googleSignin()
@@ -33,7 +40,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
-                navigate(from, { replace: true })
+                setLoginUserEmail(user.email)
+                // navigate(from, { replace: true })
             })
             .catch(err => {
                 console.log(err.message)
