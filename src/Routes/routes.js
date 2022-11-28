@@ -41,7 +41,7 @@ const router = createBrowserRouter([
             { path: '/dashboard/mywishlists', element: <MyWishlists></MyWishlists> },
             { path: '/dashboard/myproducts', element: <MyProducts></MyProducts> },
 
-            { path: '/dashboard/payment/:id', element: <Payment></Payment> },
+            { path: '/dashboard/payment/:id', element: <Payment></Payment>, loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`) },
         ]
     }
 ])

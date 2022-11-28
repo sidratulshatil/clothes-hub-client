@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const MyWishlists = () => {
     const { user } = useContext(AuthContext)
     const [myProducts, setMyproducts] = useState([])
-    // console.log(myProducts)
+    // console.log(myProducts[2]._id)
     useEffect(() => {
         fetch(`http://localhost:5000/mywishlists`)
             .then(res => res.json())
@@ -23,7 +24,7 @@ const MyWishlists = () => {
                         <p className='text-2xl font-bold'>Resale Price: <span className='text-xl font-bold text-red-700'>{myProduct.resale_price}</span></p>
                         <div className="card-actions justify-center">
 
-                            <button className="btn btn-primary text-white font-bold">Pay</button>
+                            <Link to={`/dashboard/payment/${myProduct._id}`}>    <button className="btn btn-primary text-white font-bold">Pay</button></Link>
                         </div>
                     </div>
 

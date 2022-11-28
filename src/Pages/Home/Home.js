@@ -5,6 +5,7 @@ import Category from './Category/Category';
 
 const Home = () => {
     const [advertisedItems, setadvertisedItems] = useState([])
+    // console.log(advertisedItems[0])
     useEffect(() => {
         fetch(`http://localhost:5000/advertisements`)
             .then(res => res.json())
@@ -21,10 +22,10 @@ const Home = () => {
             <h1 className='text-2xl font-bold text-blue-500 my-3'>Products Category</h1>
             <Category></Category>
             {advertisedItems.length > 0 &&
-                <div>
+                <div className='mx-10'>
                     <h1 className='text-2xl font-bold text-blue-500 my-3'>Advertised Items</h1>
                     {
-                        advertisedItems?.map(advertisedItem => <div key={advertisedItem._id} className=" w-96 bg-base-100 shadow-xl">
+                        advertisedItems?.map(advertisedItem => !advertisedItem.paid && <div key={advertisedItem._id} className=" w-96 bg-base-100 shadow-xl">
                             <figure><img className='h-60 w-full' src={advertisedItem.img} alt={advertisedItem.name} /></figure>
                             <div className="card-body">
                                 <h2 className="card-title justify-center font-bold">{advertisedItem.name}</h2>

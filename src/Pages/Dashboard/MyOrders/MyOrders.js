@@ -11,7 +11,11 @@ const MyOrders = () => {
     const { data: orders = [], isLoading } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
-            const res = await fetch(url)
+            const res = await fetch(url, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
             const data = await res.json()
             return data
         }
@@ -34,7 +38,7 @@ const MyOrders = () => {
                                 order.price && !order.paid && <Link to={`/dashboard/payment/${order._id}`}> <button className='btn btn-primary'>Pay</button></Link>
                             }
                             {
-                                order.paid && <span className='text-primary'>Paid</span>
+                                order.paid && <span className='btn text-white btn-primary btn-disabled'>Paid</span>
                             }
                         </div>
                     </div>

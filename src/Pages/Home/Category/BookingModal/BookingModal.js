@@ -5,8 +5,9 @@ import { toast } from 'react-toastify';
 
 
 const BookingModal = ({ item, user }) => {
-    console.log(item.resale_price, item.name)
-    const { img } = item
+    console.log(item._id)
+    console.log(item)
+    const { img, category_name, _id } = item
     const handleBooking = event => {
         event.preventDefault()
         const form = event.target
@@ -16,11 +17,13 @@ const BookingModal = ({ item, user }) => {
         const email = user.email
         const price = form.price.value
         const booking = {
+            category_name,
+            productId: _id,
             email,
             name,
             item,
             price,
-            img
+            img,
         }
         fetch('http://localhost:5000/bookings', {
             method: 'POST',

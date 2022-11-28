@@ -14,7 +14,7 @@ const Login = () => {
     const [createdUserEmail, setCreatedUserEmail] = useState('')
     const [loginUserEmail, setLoginUserEmail] = useState('')
     const [token] = useToken(loginUserEmail)
-    console.log('Login USER EMAIL', loginUserEmail)
+    // console.log('Login USER EMAIL', loginUserEmail)
     if (token) {
         navigate(from, { replace: true })
     }

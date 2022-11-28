@@ -13,4 +13,9 @@ Project Details:-
 - A Responsive Site .\
 Framework & Library Used in this project
 - Tailwind
-- Daysi Ui
+- Daysi Ui .\
+
+User's Credentials:-
+- adminEmail: clothshub@gmail.com
+- adminPassword: clothshub
+
