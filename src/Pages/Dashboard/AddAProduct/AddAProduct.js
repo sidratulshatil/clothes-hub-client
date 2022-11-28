@@ -39,7 +39,7 @@ const AddAProduct = () => {
             verified,
         }
         // console.log(email, category_name, name, img, location, resale_price, years_of_use, original_price, sellers_name, date)
-        fetch(`http://localhost:5000/bookings/product`, {
+        fetch(`https://clothes-hub-server.vercel.app/bookings/product`, {
             method: 'POST',
             headers: {
                 "content-type": "application/json"
@@ -59,7 +59,7 @@ const AddAProduct = () => {
     }
     const saveMyProduct = (data) => {
         const product = data
-        fetch('http://localhost:5000/myproducts', {
+        fetch('https://clothes-hub-server.vercel.app/myproducts', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -73,7 +73,7 @@ const AddAProduct = () => {
             })
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/users/email?email=${user.email}`)
+        fetch(`https://clothes-hub-server.vercel.app/users/email?email=${user.email}`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data[0].verified)

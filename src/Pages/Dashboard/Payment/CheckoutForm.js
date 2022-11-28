@@ -16,7 +16,7 @@ const CheckoutForm = ({ booking, wishData }) => {
     // console.log(productId)
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://clothes-hub-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const CheckoutForm = ({ booking, wishData }) => {
                 bookingId: _id,
                 productId
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://clothes-hub-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

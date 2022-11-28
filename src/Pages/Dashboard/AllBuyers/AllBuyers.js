@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import Loading from '../../../shared/Loading/Loading';
 
 const AllBuyers = () => {
-    const url = `http://localhost:5000/users`
+    const url = `https://clothes-hub-server.vercel.app/users`
 
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
@@ -20,7 +20,7 @@ const AllBuyers = () => {
         }
     })
     const deleteUser = (user) => {
-        fetch(`http://localhost:5000/users/${user}`, {
+        fetch(`https://clothes-hub-server.vercel.app/users/${user}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -41,7 +41,7 @@ const AllBuyers = () => {
         return <Loading></Loading>
     }
     const handleVerify = (id) => {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://clothes-hub-server.vercel.app/users/${id}`, {
             method: "PUT",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

@@ -6,7 +6,7 @@ import Loading from '../../../shared/Loading/Loading';
 const AllSellers = () => {
 
     const [deletingUser, setDeletingUser] = useState(null)
-    const url = `http://localhost:5000/users`
+    const url = `https://clothes-hub-server.vercel.app/users`
 
     const { data: users = [], isLoading, refetch } = useQuery({
         queryKey: ['users'],
@@ -22,7 +22,7 @@ const AllSellers = () => {
         }
     })
     const deleteUser = (user) => {
-        fetch(`http://localhost:5000/users/${user}`, {
+        fetch(`https://clothes-hub-server.vercel.app/users/${user}`, {
             method: "DELETE",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -43,7 +43,7 @@ const AllSellers = () => {
         return <Loading></Loading>
     }
     const handleVerify = (id) => {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://clothes-hub-server.vercel.app/users/${id}`, {
             method: "PUT",
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

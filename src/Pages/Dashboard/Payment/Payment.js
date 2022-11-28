@@ -16,7 +16,7 @@ const Payment = () => {
     const { name, price } = booking
 
     useEffect(() => {
-        fetch('http://localhost:5000/mywishlists')
+        fetch('https://clothes-hub-server.vercel.app/mywishlists')
             .then(res => res.json())
             .then(data => setWishData(data))
     }, [wishData])

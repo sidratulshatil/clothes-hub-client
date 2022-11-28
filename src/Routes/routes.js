@@ -28,7 +28,7 @@ const router = createBrowserRouter([
             { path: '/blogs', element: <Blogs></Blogs> },
             { path: '/*', element: <ErrorPage></ErrorPage> },
             { path: 'advertiseditems', element: <AdvertisedItems></AdvertisedItems> },
-            { path: '/category/:id', element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>, loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`) },
+            { path: '/category/:id', element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>, loader: ({ params }) => fetch(`https://clothes-hub-server.vercel.app/category/${params.id}`) },
         ]
     },
     {
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
             { path: '/dashboard/mywishlists', element: <MyWishlists></MyWishlists> },
             { path: '/dashboard/myproducts', element: <MyProducts></MyProducts> },
 
-            { path: '/dashboard/payment/:id', element: <Payment></Payment>, loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`) },
+            { path: '/dashboard/payment/:id', element: <Payment></Payment>, loader: ({ params }) => fetch(`https://clothes-hub-server.vercel.app/bookings/${params.id}`) },
         ]
     }
 ])

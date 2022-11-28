@@ -6,7 +6,7 @@ import Loading from '../../../shared/Loading/Loading';
 
 const MyOrders = () => {
     const { user } = useContext(AuthContext)
-    const url = `http://localhost:5000/bookings?email=${user?.email}`
+    const url = `https://clothes-hub-server.vercel.app/bookings?email=${user?.email}`
 
     const { data: orders = [], isLoading } = useQuery({
         queryKey: ['orders', user?.email],

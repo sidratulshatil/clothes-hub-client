@@ -7,7 +7,7 @@ const Home = () => {
     const [advertisedItems, setadvertisedItems] = useState([])
     // console.log(advertisedItems[0])
     useEffect(() => {
-        fetch(`http://localhost:5000/advertisements`)
+        fetch(`https://clothes-hub-server.vercel.app/advertisements`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)

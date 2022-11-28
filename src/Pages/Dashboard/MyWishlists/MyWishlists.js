@@ -7,7 +7,7 @@ const MyWishlists = () => {
     const [myProducts, setMyproducts] = useState([])
     // console.log(myProducts[2]._id)
     useEffect(() => {
-        fetch(`http://localhost:5000/mywishlists`)
+        fetch(`https://clothes-hub-server.vercel.app/mywishlists`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)

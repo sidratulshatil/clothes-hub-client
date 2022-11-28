@@ -15,14 +15,14 @@ const CategoryProducts = () => {
     console.log(currentUser)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/users/type/${user.email}`)
+        fetch(`https://clothes-hub-server.vercel.app/users/type/${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setCurrentUser(data)
             })
     }, [])
     const addToWish = (product) => {
-        fetch(`http://localhost:5000/mywishlists`, {
+        fetch(`https://clothes-hub-server.vercel.app/mywishlists`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

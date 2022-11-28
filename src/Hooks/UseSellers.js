@@ -6,7 +6,7 @@ const UseSellers = (email) => {
     const [isSellers, setIsSellers] = useState(false)
     const [isSellersLoading, setisSellersLoading] = useState(true)
     useEffect(() => {
-        fetch(`http://localhost:5000/users/sellers/${email}`)
+        fetch(`https://clothes-hub-server.vercel.app/users/sellers/${email}`)
             .then(res => res.json())
             .then(data => {
                 setIsSellers(data.isSellers)

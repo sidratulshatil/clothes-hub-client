@@ -6,7 +6,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext)
     const [myProducts, setMyproducts] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:5000/myproducts`)
+        fetch(`https://clothes-hub-server.vercel.app/myproducts`)
             .then(res => res.json())
             .then(data => {
                 // console.log(data)
@@ -15,7 +15,7 @@ const MyProducts = () => {
     }, [myProducts])
     // console.log(myProducts)
     const handleAddAdvertisement = (product) => {
-        fetch(`http://localhost:5000/advertisements`, {
+        fetch(`https://clothes-hub-server.vercel.app/advertisements`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -31,7 +31,7 @@ const MyProducts = () => {
 
     }
     const handleUpdateAdvertise = (id) => {
-        fetch(`http://localhost:5000/myproducts/${id}`, {
+        fetch(`https://clothes-hub-server.vercel.app/myproducts/${id}`, {
             method: "PUT",
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -46,7 +46,7 @@ const MyProducts = () => {
     }
     const handleDelete = (id) => {
         console.log(id)
-        fetch(`http://localhost:5000/myproducts/${id}`, {
+        fetch(`https://clothes-hub-server.vercel.app/myproducts/${id}`, {
             method: "DELETE",
             // headers: {
             //     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -64,7 +64,7 @@ const MyProducts = () => {
             })
     }
     const totalDelete = (id) => {
-        fetch(`http://localhost:5000/bookings/product/${id}`, {
+        fetch(`https://clothes-hub-server.vercel.app/bookings/product/${id}`, {
             method: "DELETE"
         })
             .then(res => res.json())
